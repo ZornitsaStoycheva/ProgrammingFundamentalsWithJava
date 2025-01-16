@@ -17,25 +17,22 @@ public class TheLift_10 {
 
         for (int i = 0; i < lift.length; i++) {
             if (lift[i] < 4) {
-                int wagon = lift[i];
-                if (people > 4) {
-                    int stayPeople = people - (people - 4 + wagon);
-                    people -= stayPeople;
-                    lift[i] += stayPeople;
+                if (people >= 4 - lift[i]) {
+                    lift[i] = 4;
                 } else {
-                    isFound = true;
-                    lift[i] = people - wagon;
-                    people = people - lift[i];
-                    //people -= people - (people - 4 + wagon);
-                }
-
-                if (people <= 0) {
-                    isFound = true;
-                    break;
+                    lift[i] += people;
+                    people = 0;
                 }
             }
         }
-        if (people == 0 && !isFound) {
+
+        for (int i = 0; i < lift.length; i++) {
+            if (lift[i] < 4) {
+                isFound = true;
+                break;
+            }
+        }
+        if (people == 0 && isFound) {
             System.out.println("The lift has empty spots!");
             for (int i = 0; i < lift.length; i++) {
                 System.out.print(lift[i] + " ");
@@ -45,6 +42,10 @@ public class TheLift_10 {
             for (int i = 0; i < lift.length; i++) {
                 System.out.print(lift[i] + " ");
             }
+        }
+
+        for (int element : lift) {
+            System.out.print(element + " ");
         }
     }
 }
