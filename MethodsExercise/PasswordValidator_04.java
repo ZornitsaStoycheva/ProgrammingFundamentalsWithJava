@@ -8,40 +8,25 @@ public class PasswordValidator_04 {
 
         String password = scanner.nextLine();
 
-        boolean isValidPass = false;
-        boolean isValid2 = false;
-        boolean isValid3 = false;
-        if(isLengthBetweenSixAndTenDigit(password)) {
-            isValidPass = true;
+        if(!isLengthBetweenSixAndTenDigit(password)) {
+            System.out.println("Password must be between 6 and 10 characters");
         }
 
-        if(isContainDigitAndLetter(password)) {
-            isValid2 = true;
+        if(!isContainDigitAndLetter(password)) {
+            System.out.println("Password must consist only of letters and digits");
         }
 
-        if(isContainsLessTwoDigits(password)) {
-            isValid3 = true;
+        if(!isContainsLessTwoDigits(password)) {
+            System.out.println("Password must have at least 2 digits");
         }
 
-        if(isValidPass && isValid2 && isValid3) {
+        if(isLengthBetweenSixAndTenDigit(password) && isContainDigitAndLetter(password) && isContainsLessTwoDigits(password)) {
             System.out.println("Password is valid");
         }
-
-
-
-    }
-
-    public static String isValid(String password) {
-        String output = "";
-        isLengthBetweenSixAndTenDigit(password);
-        isContainDigitAndLetter(password);
-        isContainsLessTwoDigits(password);
-
-        return "Password is valid";
     }
     public static boolean isLengthBetweenSixAndTenDigit(String password) {
-        if (password.length() < 6 || password.length() > 10) {
-            System.out.println("Password must be between 6 and 10 characters");
+        if (password.length() >= 6 && password.length() <= 10) {
+            return true;
         }
         return false;
     }
@@ -49,12 +34,11 @@ public class PasswordValidator_04 {
     public static boolean isContainDigitAndLetter(String password) {
         for (int i = 0; i < password.length(); i++) {
             char symbol = password.charAt(i);
-            if (!Character.isDigit(symbol) && !Character.isLetter(symbol)) {
-                System.out.println("Password must consist only of letters and digits");
-                break;
+            if (!Character.isLetterOrDigit(symbol)) {
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     public static boolean isContainsLessTwoDigits(String password) {
@@ -66,9 +50,8 @@ public class PasswordValidator_04 {
             }
         }
 
-        if(count < 2) {
-            System.out.println("Password must have at least 2 digits");
-            return false;
+        if(count >= 2) {
+            return true;
         }
         return false;
     }
