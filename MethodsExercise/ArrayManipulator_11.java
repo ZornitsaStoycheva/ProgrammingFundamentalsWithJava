@@ -40,12 +40,11 @@ public class ArrayManipulator_11 {
                     int max = Integer.MIN_VALUE;
                     int index = -1;
                     for (int i = 0; i < arr.length; i++) {
-                        if (arr[i] % 2 == 0 && max < arr[i]) {
-                            if(max == arr[i]) {
-                                System.out.println(i);
+                        if (arr[i] % 2 == 0 && max <= arr[i]) {
+                            if(max <= arr[i]) {
+                                max = arr[i];
+                                index = i;
                             }
-                            max = arr[i];
-                            index = i;
                         }
                     }
                     if (index == -1) {
@@ -57,12 +56,11 @@ public class ArrayManipulator_11 {
                     int max = Integer.MIN_VALUE;
                     int index = -1;
                     for (int i = 0; i < arr.length; i++) {
-                        if (arr[i] % 2 == 1 && max < arr[i]) {
-                            if(max == arr[i]) {
-                                System.out.println(i);
+                        if (arr[i] % 2 == 1 && max <= arr[i]) {
+                            if(max <= arr[i]) {
+                                max = arr[i];
+                                index = i;
                             }
-                            max = arr[i];
-                            index = i;
                         }
                     }
                     if (index == -1) {
@@ -79,12 +77,11 @@ public class ArrayManipulator_11 {
                     int min = Integer.MAX_VALUE;
                     int index = -1;
                     for (int i = 0; i < arr.length; i++) {
-                        if (arr[i] % 2 == 0 && min > arr[i]) {
-                            if(min == arr[i]) {
-                                System.out.println(i);
+                        if (arr[i] % 2 == 0 && min >= arr[i]) {
+                            if(min >= arr[i]) {
+                                min = arr[i];
+                                index = i;
                             }
-                            min = arr[i];
-                            index = i;
                         }
                     }
                     if (index == -1) {
@@ -96,12 +93,11 @@ public class ArrayManipulator_11 {
                     int min = Integer.MAX_VALUE;
                     int index = -1;
                     for (int i = 0; i < arr.length; i++) {
-                        if (arr[i] % 2 == 1 && min > arr[i]) {
-                            if(min == arr[i]) {
-                                System.out.println(i);
+                        if (arr[i] % 2 == 1 && min >= arr[i]) {
+                            if(min >= arr[i]) {
+                                min = arr[i];
+                                index = i;
                             }
-                            min = arr[i];
-                            index = i;
                         }
                     }
                     if (index == -1) {
@@ -122,13 +118,14 @@ public class ArrayManipulator_11 {
                     if (count >= 1 && count <= arr.length) {
                        for (int i = 0; i < arr.length; i++) {
                            if (arr[i] % 2 == 0) {
-                               if (i <= count) {
+                               if (i < count) {
                                    evenArr[i] = arr[i];
                                }
                            }
                        }
 
-                       System.out.println(Arrays.toString(evenArr));
+                        int[] result = Arrays.stream(evenArr).filter(x -> x != 0).toArray();
+                       System.out.println(Arrays.toString(result));
                    } else {
                        System.out.println("Invalid count");
                    }
@@ -138,12 +135,13 @@ public class ArrayManipulator_11 {
                         if (count >= 1 && count <= arr.length) {
                             for (int i = 0; i < arr.length; i++) {
                                 if (arr[i] % 2 == 1) {
-                                    if (i <= count) {
+                                    if (i < count) {
                                         oddArr[i] = arr[i];
                                     }
                                 }
                             }
-                            System.out.println(Arrays.toString(oddArr));
+                            int[] result = Arrays.stream(oddArr).filter(x -> x != 0).toArray();
+                            System.out.println(Arrays.toString(result));
                         } else {
                             System.out.println("Invalid count");
                         }
@@ -155,34 +153,40 @@ public class ArrayManipulator_11 {
 
                 if (command.equals("even")) {
 
+                    int counter = 0;
                     int[] evenArr = new int[count];
-                    if (count >= 1 && count <= arr.length ) {
+                    if (count >= 1 && count <= arr.length) {
                         for (int i = arr.length - 1; i >= 0; i--) {
                             if (arr[i] % 2 == 0) {
-                                if (i <= count) {
-                                    evenArr[i] = arr[i];
+                                if (counter < evenArr.length) {
+                                    evenArr[counter] = arr[i];
+                                    counter++;
                                 }
                             }
                         }
-
-                        System.out.println(Arrays.toString(evenArr));
+                        int[] sorted = Arrays.stream(evenArr).sorted().toArray();
+                        int[] result = Arrays.stream(evenArr).filter(x -> x != 0).toArray();
+                        System.out.println(Arrays.toString(result));
                     } else {
                         System.out.println("Invalid count");
                     }
 
                 } else if (command.equals("odd")) {
 
+                    int counter = 0;
                     int[] oddArr = new int[count];
-                    if (count >= 1 && count <= arr.length ) {
+                    if (count >= 1 && count <= arr.length) {
                         for (int i = arr.length - 1; i >= 0; i--) {
                             if (arr[i] % 2 == 1) {
-                                if (i <= count) {
-                                    oddArr[i] = arr[i];
+                                if (counter < oddArr.length) {
+                                    oddArr[counter] = arr[i];
+                                    counter++;
                                 }
                             }
                         }
-
-                        System.out.println(Arrays.toString(oddArr));
+                        int[] sorted = Arrays.stream(oddArr).sorted().toArray();
+                        int[] result = Arrays.stream(oddArr).filter(x -> x != 0).toArray();
+                        System.out.println(Arrays.toString(result));
                     } else {
                         System.out.println("Invalid count");
                     }
