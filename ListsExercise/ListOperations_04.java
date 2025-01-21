@@ -21,7 +21,7 @@ public class ListOperations_04 {
             if (commandLine[0].equals("Add")) {
                 int number = Integer.parseInt(commandLine[1]);
 
-                numbers.add(numbers.size() - 1, number);
+                numbers.add(numbers.size(), number);
 
             } else if (commandLine[0].equals("Remove")) {
                 int index = Integer.parseInt(commandLine[1]);
