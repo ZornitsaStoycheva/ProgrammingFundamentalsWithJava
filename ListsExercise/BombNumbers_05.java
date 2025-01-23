@@ -25,7 +25,7 @@ public class BombNumbers_05 {
                 int currentIndexRight = arr[1];
                 int currentIndexLeft = arr[1];
 
-                while (index + 1 <= numbers.size() - 1 && currentIndexRight > 0) {
+                while (index <= numbers.size() - 1 && currentIndexRight > 0) {
                     numbers.remove(index + 1);
                     currentIndexRight--;
                     index ++;
