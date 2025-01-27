@@ -34,9 +34,9 @@ public class DrumSet_05 {
 
                 if (drumSet.get(i) <= 0) {
                     if (saveMoney - needMoney <= 0) {
-                        drumSet.remove(i);
                         initialList.remove(i);
-                        if (i == 0 && i < drumSet.size()) {
+                        if (i < drumSet.size()) {
+                            drumSet.remove(i);
                             i--;
                         }
                     } else {
