@@ -6,47 +6,36 @@ public class Orders_03 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        String[] games = scanner.nextLine().split("\\s+");
+        String input = scanner.nextLine();
 
-        Map<String, Integer> legendary = new TreeMap<>();
+        String[] arr = new String[2];
 
-        int digit = 0;
-        String modes = "";
+        Map<String, List<Double>> items = new LinkedHashMap<>();
 
-        for (int i = 0; i < games.length; i++) {
-            if (i % 2 == 0) {
-                digit = Integer.parseInt(games[i]);
+        while (!input.equals("buy")) {
+
+            String[] inputLine = input.split(" ");
+
+            String product = inputLine[0];
+            Double price = Double.parseDouble(inputLine[1]);
+            Double quantity = Double.parseDouble(inputLine[2]);
+
+            if(!items.containsKey(product)) {
+                items.put(product, Arrays.asList(price, quantity));
             } else {
-                modes = games[i].toLowerCase();
-                if (!legendary.containsKey(modes)) {
-                    legendary.put(modes, digit);
-                } else {
-                    legendary.put(modes, legendary.get(modes) + digit);
-                }
+
+                items.get(product).set(0, price);
+                items.get(product).set(1, items.get(product).get(1) + quantity);
+
             }
+            input = scanner.nextLine();
         }
 
-        int max = Integer.MIN_VALUE;
-        String winner = "";
-
-        for (Map.Entry<String, Integer> entry : legendary.entrySet()) {
-            if (entry.getKey().equals("shards") && entry.getValue() >= 250) {
-                legendary.put(entry.getKey(), legendary.get(entry.getKey()) - 250);
-                winner = "Shadowmourne";
-            } else if (entry.getKey().equals("fragments") && entry.getValue() >= 250) {
-                legendary.put(entry.getKey(), legendary.get(entry.getKey()) - 250);
-                winner = "Valanyr";
-            } else if (entry.getKey().equals("motes") && entry.getValue() >= 250) {
-                winner = "Dragonwrath";
-                legendary.put(entry.getKey(), legendary.get(entry.getKey()) - 250);
-            }
+        for (Map.Entry<String, List<Double>> entry : items.entrySet()) {
+            double sum = entry.getValue().get(0) * entry.getValue().get(1);
+            System.out.printf("%s -> %.2f%n", entry.getKey(), sum);
         }
 
-        System.out.printf("%s obtained!%n", winner);
-
-        for (Map.Entry<String, Integer> entry : legendary.entrySet()) {
-            System.out.printf("%s: %d%n", entry.getKey(), entry.getValue());
-        }
 
     }
 }
