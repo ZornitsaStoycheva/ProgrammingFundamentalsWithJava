@@ -1,6 +1,7 @@
 package MapsLambdaAndStreamAPIMoreExercise;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 public class Ranking_01 {
     public static void main(String[] args) {
@@ -10,7 +11,7 @@ public class Ranking_01 {
 
         Map<String, String> contents = new LinkedHashMap<>();
 
-        Map<String, Map<String, Integer>> users = new LinkedHashMap<>();
+        Map<String, Map<String, Integer>> users = new TreeMap<>();
 
         while (!inputContents.equals("end of contests")) {
 
@@ -59,35 +60,31 @@ public class Ranking_01 {
         }
 
         int max = Integer.MIN_VALUE;
+        String output = "";
+        String user = "";
+
         for (Map.Entry<String, Map<String, Integer>> entry : users.entrySet()) {
-            Map<String, Integer> entryValue = entry.getValue();
-            
-            int totalScore = entryValue.values().stream()
-                    .mapToInt(Integer::intValue)
-                    .sum();
+            int winner = entry.getValue().values().stream()
+                    .mapToInt(Integer::intValue).sum();
 
-            if (totalScore > max) {
-                max = totalScore;
+            if (max < winner) {
+                max = winner;
+                user = entry.getKey();
             }
+            output = "Best candidate is %s with total %d points.%n";
         }
-        System.out.printf("Best candidate is %s with total %d points.%n", "a", max);
 
+        System.out.printf(output, user, max);
         System.out.println("Ranking:");
-
         for (Map.Entry<String, Map<String, Integer>> entry : users.entrySet()) {
+
             System.out.printf("%s%n", entry.getKey());
-            Map<String, Integer> entryValue = entry.getValue();
+            Stream<Map.Entry<String, Integer>> sorted =
+                    entry.getValue().entrySet().stream().sorted((a, b) -> b.getValue().compareTo(a.getValue()));
 
-            int maxValue = entryValue.values().stream()
-                    .mapToInt(Integer::intValue)
-                    .max().orElse(0);
-
-            for (Map.Entry<String, Integer> entryVali : entryValue.entrySet()) {
-
-                System.out.printf("#  %s -> %d%n", entry.getKey(), entryVali.getValue());
-            }
-
+            sorted.forEach(x -> System.out.printf("#  %s -> %d%n", x.getKey(), x.getValue()));
         }
+
 
     }
 }
