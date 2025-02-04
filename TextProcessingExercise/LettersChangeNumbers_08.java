@@ -45,7 +45,7 @@ public class LettersChangeNumbers_08 {
                 int index = alphabetToLowerCase.indexOf(z);
                 lastSum += (index + 1);
             }
-            
+
             if(contains3) {
                 int index = alphabetToUpperCase.indexOf(z);
                 lastSum -= (index + 1);
