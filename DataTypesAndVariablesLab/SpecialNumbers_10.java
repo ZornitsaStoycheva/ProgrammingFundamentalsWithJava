@@ -8,9 +8,11 @@ public class SpecialNumbers_10 {
 
         int n = Integer.parseInt(scanner.nextLine());
 
+        int sum = 0;
+
         for (int i = 1; i <= n ; i++) {
 
-            if (i == 5 || i == 7) {
+            if (i % 5 == n || i % 7 == n || i % 11 == n) {
                 System.out.printf("%d -> True%n", i);
             } else {
                 System.out.printf("%d -> False%n", i);
