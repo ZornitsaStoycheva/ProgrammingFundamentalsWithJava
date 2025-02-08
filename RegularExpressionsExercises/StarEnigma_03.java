@@ -9,6 +9,7 @@ public class StarEnigma_03 {
         Scanner scanner = new Scanner(System.in);
 
         int n = Integer.parseInt(scanner.nextLine());
+        StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < n; i++) {
 
@@ -23,19 +24,17 @@ public class StarEnigma_03 {
                 }
             }
 
-            String decrypt = "";
-
             for (int j = 0; j < message.length(); j++) {
                 int digit = message.charAt(j);
                 int decryptDigit = digit - count;
-                decrypt += (char) decryptDigit;
+                sb.append((char) decryptDigit);
             }
 
-            String regex = "/@(?<namePlanet>[A-Z][a-z]+)([^@\\->!:]?):(?<peoplePlanet>[0-9]+)!(?<attack>[A,D])!->(?<soldierCount>[0-9]+)\\b/gm";
+            String regex = "(@(?<namePlanet>[A-Z][a-z]+)([^@\\->!:]*):(?<peoplePlanet>[0-9]+)([^@\\->!:]*)!(?<attack>[A|D])([^@\\->!:]*)!->(?<soldierCount>[0-9]+)\\b)";
             Pattern pattern = Pattern.compile(regex);
-            Matcher matcher = pattern.matcher(decrypt);
+            Matcher matcher = pattern.matcher(sb.toString());
 
-            System.out.println(matcher);
+            System.out.println(sb.toString());
 
             int countAttacked = 0;
             int countDestroyed = 0;
@@ -55,6 +54,7 @@ public class StarEnigma_03 {
                 System.out.println(countAttacked);
                 System.out.println(countDestroyed);
             }
+            sb.delete(0, sb.length());
         }
     }
 }
