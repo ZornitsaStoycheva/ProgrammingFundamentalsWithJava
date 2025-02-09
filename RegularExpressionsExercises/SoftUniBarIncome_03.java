@@ -10,7 +10,7 @@ public class SoftUniBarIncome_03 {
 
         String input = scanner.nextLine();
 
-        String regex = "%(?<name>[A-Z]{1}[a-z]+)%<(?<product>[A-Za-z]+)>\\|(?<quantity>[0-9]+)\\|(?<price>[0-9]+.?[0-9]+)";
+        String regex = "%(?<name>[A-Z][a-z]+)%[^|$%.]*<(?<product>\\w+)>[^|$%.]*\\|(?<quantity>[0-9]+)\\|[^|$%.]*?(?<price>[0-9]+\\.?[0-9]+)\\$";
 
         double totalPrice = 0.0;
 
