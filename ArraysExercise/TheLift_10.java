@@ -13,35 +13,28 @@ public class TheLift_10 {
                 .mapToInt(Integer::parseInt)
                 .toArray();
 
-        boolean isFound = false;
+        boolean isFound = true;
 
         for (int i = 0; i < lift.length; i++) {
-            if (lift[i] < 4) {
-                if (people >= 4 - lift[i]) {
-                    lift[i] = 4;
-                } else {
+
+            int space = 4 - lift[i];
+
+            if (space > 0) {
+                if (space > people) {
                     lift[i] += people;
                     people = 0;
+                    isFound = false;
+                } else {
+                    lift[i] = 4;
+                    people -= space;
                 }
             }
         }
 
-        for (int i = 0; i < lift.length; i++) {
-            if (lift[i] < 4) {
-                isFound = true;
-                break;
-            }
-        }
-        if (people == 0 && isFound) {
+        if (!isFound) {
             System.out.println("The lift has empty spots!");
-            for (int i = 0; i < lift.length; i++) {
-                System.out.print(lift[i] + " ");
-            }
-        } else if (people > 0 && !isFound) {
-            System.out.println("There isn't enough space! 10 people in a queue!");
-            for (int i = 0; i < lift.length; i++) {
-                System.out.print(lift[i] + " ");
-            }
+        } else if (people > 0) {
+            System.out.printf("There isn't enough space! %d people in a queue!%n", people);
         }
 
         for (int element : lift) {

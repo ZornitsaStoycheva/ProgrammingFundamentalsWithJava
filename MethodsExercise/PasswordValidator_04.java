@@ -8,51 +8,48 @@ public class PasswordValidator_04 {
 
         String password = scanner.nextLine();
 
-        if(!isLengthBetweenSixAndTenDigit(password)) {
+        boolean isLengthValid = isLengthValid(password);
+        if (!isLengthValid) {
             System.out.println("Password must be between 6 and 10 characters");
         }
 
-        if(!isContainDigitAndLetter(password)) {
+        boolean isContentValid = isContentValid(password);
+        if (!isContentValid) {
             System.out.println("Password must consist only of letters and digits");
         }
 
-        if(!isContainsLessTwoDigits(password)) {
+        boolean isAtLeastTwoDigits = isAtLeastTwoDigits(password);
+        if (!isAtLeastTwoDigits) {
             System.out.println("Password must have at least 2 digits");
         }
 
-        if(isLengthBetweenSixAndTenDigit(password) && isContainDigitAndLetter(password) && isContainsLessTwoDigits(password)) {
+        if (isLengthValid && isContentValid && isAtLeastTwoDigits) {
             System.out.println("Password is valid");
         }
     }
-    public static boolean isLengthBetweenSixAndTenDigit(String password) {
-        if (password.length() >= 6 && password.length() <= 10) {
-            return true;
-        }
-        return false;
-    }
 
-    public static boolean isContainDigitAndLetter(String password) {
-        for (int i = 0; i < password.length(); i++) {
-            char symbol = password.charAt(i);
-            if (!Character.isLetterOrDigit(symbol)) {
-                return true;
-            }
-        }
-        return false;
-    }
+    public static boolean isAtLeastTwoDigits(String input) {
 
-    public static boolean isContainsLessTwoDigits(String password) {
-        int count = 0;
-        for (int i = 0; i < password.length(); i++) {
-            char symbol = password.charAt(i);
+        int digitsCount = 0;
+        for (char symbol : input.toCharArray()) {
             if (Character.isDigit(symbol)) {
-                count ++;
+                digitsCount++;
             }
         }
+        return digitsCount >= 2;
+    }
 
-        if(count >= 2) {
-            return true;
+
+    public static boolean isLengthValid(String input) {
+        return input.length() >= 6 && input.length() <= 10;
+    }
+
+    public static boolean isContentValid(String input) {
+        for (char symbol : input.toCharArray()) {
+            if (!Character.isLetterOrDigit(symbol)) {
+                return false;
+            }
         }
-        return false;
+        return true;
     }
 }

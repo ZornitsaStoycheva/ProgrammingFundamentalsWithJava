@@ -11,23 +11,20 @@ public class CondenseArrayToNumber_06 {
                 .mapToInt(Integer::parseInt)
                 .toArray();
 
-        int start = 0;
-        int end = 0;
-        int count = 0;
-        int max = Integer.MIN_VALUE;
+        if (arr.length == 1) {
+            System.out.print(arr[0]);
+            return;
+        }
 
-        for (int i = 2; i <= arr.length - 1; i++) {
+        while (arr.length > 1) {
+            int[] condensed = new int[arr.length - 1];
 
-            if (arr[i - 2] == arr[i] && arr[i - 1] == arr[i]) {
-                start = i;
-                count++;
-                max = i;
-                System.out.print(arr[i - 2] + " ");
+            for (int i = 0; i < condensed.length; i++) {
+                condensed[i] = arr[i] + arr[i + 1];
             }
-        }
 
-        for (int i = start - count; i < start; i++) {
-            System.out.print(arr[i] + " ");
+            arr = condensed;
         }
+        System.out.println(arr[0]);
     }
 }
