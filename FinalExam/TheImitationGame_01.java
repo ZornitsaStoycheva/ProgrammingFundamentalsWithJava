@@ -10,6 +10,9 @@ public class TheImitationGame_01 {
 
         String input = scanner.nextLine();
 
+        StringBuilder sb = new StringBuilder();
+        sb.append(message);
+
         while (!input.equals("Decode")) {
 
             String[] inputLine = input.split("\\|");
@@ -20,12 +23,9 @@ public class TheImitationGame_01 {
 
                 int numberOfLetters = Integer.parseInt(inputLine[1]);
 
-                boolean isValid = isValid(message, numberOfLetters);
-
-                String startText = message.substring(0, numberOfLetters);
-                String endText = message.substring(numberOfLetters);
-                String newText = endText.concat(startText);
-                message = newText;
+                String startText = sb.substring(0, numberOfLetters);
+                sb.delete(0, numberOfLetters);
+                sb.append(startText);
 
 
             } else if (command.equals("Insert")) {
@@ -33,32 +33,26 @@ public class TheImitationGame_01 {
                 int index = Integer.parseInt(inputLine[1]);
                 String value = inputLine[2];
 
-                boolean isValid = isValid(message, index);
+                sb.insert(index, value);
 
-                if (isValid) {
-                    String startText = message.substring(0, index);
-                    String endText = message.substring(index);
-                    String newText = startText.concat(value).concat(endText);
-                    message = newText;
-                }
 
             } else if (command.equals("ChangeAll")) {
 
                 String substring = inputLine[1];
                 String replacement = inputLine[2];
 
-                if (message.contains(substring)) {
-                    String sub = message.replaceAll(substring, replacement);
-                    message = sub;
-                }
-            }
+                String s = sb.toString();
+                String s1 = s.replaceAll(substring, replacement);
+                sb = new StringBuilder(s1);
 
+
+            }
             input = scanner.nextLine();
         }
+            System.out.printf("The decrypted message is: %s", sb.toString());
 
-        System.out.printf("The decrypted message is: %s", message);
     }
-    public static boolean isValid(String text, int index) {
-        return index >= 0 && index <= text.length();
-    }
+//    public static boolean isValid(String text, int index) {
+//        return index >= 0 && index < text.length();
+//    }
 }

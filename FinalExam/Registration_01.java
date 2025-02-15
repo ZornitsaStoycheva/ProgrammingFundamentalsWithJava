@@ -38,32 +38,25 @@ public class Registration_01 {
 
                 if(isValidStartIndex && isValidEndIndex) {
                     String startText = username.substring(0, startIndex);
-                    String middleText = "";
-                    if (endIndex + 1 == username.length() - 1) {
-                        middleText = username.substring(startIndex);
-                    } else {
-                        middleText = username.substring(startIndex, endIndex + 1);
-                    }
-                    String endText = username.substring(endIndex + 1, username.length() - 1);
-                    sb.append(middleText);
-                    sb.reverse();
+                    String middleText = username.substring(startIndex, endIndex + 1);
+                    StringBuilder reverseSB = new StringBuilder();
 
-                    System.out.println(sb);
-                    sb.delete(0, sb.length());
+                    reverseSB.append(middleText);
+                    reverseSB.reverse();
+                    System.out.println(reverseSB);
+
                 }
 
             } else if (command.equals("Substring")) {
                 String sub = input[1];
 
                 if(username.contains(sub)) {
-                    while (username.contains(sub)) {
-                        int index = username.indexOf(sub);
-                        String substring = username.substring(index, sub.length() + 1);
-                        String replace = username.replace(substring, "");
+
+                        String replace = username.replace(sub, "");
 
                         username = replace;
                         System.out.println(username);
-                    }
+
                 } else {
                     System.out.printf("The username %s doesn't contain %s.%n", username, sub);
                 }
@@ -94,6 +87,6 @@ public class Registration_01 {
     }
 
     public static boolean isValid(String text, int index) {
-        return index >= 0 && index <= text.length() - 1;
+        return index >= 0 && index < text.length();
     }
 }
