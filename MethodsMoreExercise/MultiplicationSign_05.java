@@ -10,12 +10,14 @@ public class MultiplicationSign_05 {
         int n2 = Integer.parseInt(scanner.nextLine());
         int n3 = Integer.parseInt(scanner.nextLine());
 
-        if (n1 < 0 || n2 < 0 || n3 < 0) {
-            System.out.println("negative");
-        } else if (n1 == 0 || n2 == 0 || n3 == 0) {
-            System.out.println("zero");
-        } else {
+        int sum = n1 * n2 * n3;
+
+        if(sum > 0) {
             System.out.println("positive");
+        } else if (sum < 0) {
+            System.out.println("negative");
+        } else {
+            System.out.println("zero");
         }
 
     }

@@ -20,24 +20,41 @@ public class AnonymousThreat_08 {
             int startIndex = Integer.parseInt(line[1]);
             int endIndex = Integer.parseInt(line[2]);
 
+            if (startIndex < 0) {
+                startIndex = 0;
+            }
+
+
             if(lineCommand.equals("merge")) {
-                String start = "";
 
-                if (startIndex < 0) {
-                    startIndex = 0;
+                if (endIndex > input.size()) {
+                    endIndex = input.size();
                 }
 
-                if (endIndex > input.size() - 1) {
-                    endIndex = input.size() - 1;
+                for (int i = startIndex + 1; i < endIndex; i++) {
+                    String current = input.get(startIndex);
+
+                    input.set(startIndex, input.get(startIndex).concat(input.get(i)));
+                    input.remove(input.get(i));
+                    i --;
+                    endIndex --;
                 }
 
-                for (int i = startIndex + 1; i <= endIndex; i++) {
-                    String a = input.get(startIndex);
-                    start = a.concat(input.get(startIndex + 1));
-                    input.set(startIndex, start);
-                    input.remove(startIndex + 1);
-                }
             } else if (lineCommand.equals("divide")) {
+
+                if (input.get(startIndex).length() < endIndex) {
+                    endIndex = input.get(startIndex).length();
+                }
+
+                String current = input.get(startIndex);
+
+                if (current.length() % 2 == 0) {
+
+                    for (int i = 0; i < current.length(); i++) {
+                        
+                    }
+
+                }
 
             }
 
